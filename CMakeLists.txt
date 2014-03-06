@@ -92,9 +92,9 @@ set(PARAMETERS_DIR ${PROJECT_SOURCE_DIR}/parameters)
 set(KERNELS_DIR ${PROJECT_SOURCE_DIR})
 set(TESTDATA_DIR ${PROJECT_SOURCE_DIR}/tests/data)
 if(TSF_USE_EXTRNAL_OUL)
-set(OUL_DIR ${TSF_EXTERNAL_OUL_PATH})
+    set(OUL_DIR ${OpenCLUtilityLibrary_SOURCE_DIR})
 else(TSF_USE_EXTRNAL_OUL)
-set(OUL_DIR ${PROJECT_SOURCE_DIR}/OpenCLUtilityLibrary)
+    set(OUL_DIR ${PROJECT_SOURCE_DIR}/OpenCLUtilityLibrary)
 endif(TSF_USE_EXTRNAL_OUL)
 
 #------------------------------------------------------------------------------
