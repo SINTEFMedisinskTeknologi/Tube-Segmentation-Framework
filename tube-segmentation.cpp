@@ -65,9 +65,9 @@ TSFOutput * run(std::string filename, paramList &parameters, std::string kernel_
         criteria.setTypeCriteria(oul::DEVICE_TYPE_CPU);
     }
     
-    if(getParamBool(parameters, "timing")) {
-        oul::RuntimeMeasurementsManager::enable();
-    }
+//    if(getParamBool(parameters, "timing")) {
+//        oul::RuntimeMeasurementsManager::enable();
+//    }
 
     SIPL::int3 * size = new SIPL::int3();
     TSFOutput * output = new TSFOutput(criteria, size, getParamBool(parameters, "16bit-vectors"));
