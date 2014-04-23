@@ -44,6 +44,6 @@ void runCircleFittingAndNewCenterlineAlg(OpenCL *, cl::Image3D *dataset, SIPL::i
 void runCircleFittingAndTest(OpenCL *, cl::Image3D *dataset, SIPL::int3 * size, paramList &parameters, TSFOutput *);
 
 
-TSFOutput * run(std::string filename, paramList &parameters, std::string kernel_dir);
+TSFOutput * run(std::string filename, paramList &parameters, std::string kernel_dir, std::string oul_dir);
 
 #endif

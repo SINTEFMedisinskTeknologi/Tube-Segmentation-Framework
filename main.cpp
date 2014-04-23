@@ -37,7 +37,7 @@ int main(int argc, char ** argv) {
 
     TSFOutput * output;
     try {
-		output = run(filename, parameters, std::string(KERNELS_DIR));
+		output = run(filename, parameters, std::string(KERNELS_DIR), std::string(OUL_DIR));
     } catch(SIPL::SIPLException &e) {
     	std::cout << e.what() << std::endl;
 

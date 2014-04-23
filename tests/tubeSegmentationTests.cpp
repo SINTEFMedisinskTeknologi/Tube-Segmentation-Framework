@@ -3,7 +3,7 @@
 
 TEST(TubeSegmentation, WrongFilenameException) {
 	paramList parameters = initParameters(PARAMETERS_DIR);
-	ASSERT_THROW(run("somefilethatdoesntexist.mhd", parameters, KERNELS_DIR), SIPL::IOException);
+	ASSERT_THROW(run("somefilethatdoesntexist.mhd", parameters, KERNELS_DIR, OUL_DIR), SIPL::IOException);
 }
 
 
@@ -41,7 +41,7 @@ protected:
 TubeValidation runSyntheticData(paramList parameters) {
 	std::string datasetNr = "1";
 	TSFOutput * output;
-	output = run(std::string(TESTDATA_DIR) + std::string("/synthetic/dataset_") + datasetNr + std::string("/noisy.mhd"), parameters, KERNELS_DIR);
+	output = run(std::string(TESTDATA_DIR) + std::string("/synthetic/dataset_") + datasetNr + std::string("/noisy.mhd"), parameters, KERNELS_DIR, OUL_DIR);
 
 	TubeValidation result = validateTube(
 			output,

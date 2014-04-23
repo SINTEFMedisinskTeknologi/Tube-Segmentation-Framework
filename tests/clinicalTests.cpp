@@ -15,7 +15,7 @@ protected:
 
 TubeValidation runClinicalData(paramList parameters, std::string name) {
 	TSFOutput * output;
-	output = run(std::string(TESTDATA_DIR) + std::string("/clinical/") + name + std::string("/input.mhd"), parameters, KERNELS_DIR);
+	output = run(std::string(TESTDATA_DIR) + std::string("/clinical/") + name + std::string("/input.mhd"), parameters, KERNELS_DIR, OUL_DIR);
 
 	TubeValidation result = validateTube(
 			output,

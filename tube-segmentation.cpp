@@ -24,7 +24,6 @@
 #include "HelperFunctions.hpp"
 #include "HistogramPyramids.hpp"
 #include "RuntimeMeasurement.hpp"
-#include "tsf-config.h"
 #define MAX(a,b) a > b ? a : b
 // Undefine windows crap
 #ifdef WIN32
@@ -53,7 +52,7 @@ void print(paramList parameters){
 }
 
 int runCounter = 0;
-TSFOutput * run(std::string filename, paramList &parameters, std::string kernel_dir) {
+TSFOutput * run(std::string filename, paramList &parameters, std::string kernel_dir, std::string oul_dir) {
 
     INIT_TIMER
     oul::DeviceCriteria criteria;
@@ -102,7 +101,7 @@ TSFOutput * run(std::string filename, paramList &parameters, std::string kernel_
         if(getParamBool(parameters, "16bit-vectors")) {
         	buildOptions = "-D VECTORS_16BIT";
         }
-        buildOptions += " -I "+std::string(OUL_DIR)+"";
+        buildOptions += " -I "+oul_dir+"";
         c.createProgramFromSource(filename, buildOptions);
         BoolParameter v = parameters.bools["3d_write"];
         v.set(true);
@@ -118,7 +117,7 @@ TSFOutput * run(std::string filename, paramList &parameters, std::string kernel_
         	buildOptions = "-D VECTORS_16BIT";
         	std::cout << "NOTE: Forcing the use of 16 bit buffers. This is slow, but uses half the memory." << std::endl;
         }
-        buildOptions += " -I "+std::string(OUL_DIR)+"";
+        buildOptions += " -I "+oul_dir+"";
         c.createProgramFromSource(filename, buildOptions);
     }
     ocl->program = c.getProgram(0);
@@ -163,7 +162,7 @@ TSFOutput * run(std::string filename, paramList &parameters, std::string kernel_
         if(e.err() == CL_INVALID_COMMAND_QUEUE && runCounter < 2) {
             std::cout << "OpenCL error: Invalid Command Queue. Retrying..." << std::endl;
             runCounter++;
-            return run(filename,parameters,kernel_dir);
+            return run(filename,parameters,kernel_dir,oul_dir);
         }
         std::string msg;
         msg.append(e.what());
