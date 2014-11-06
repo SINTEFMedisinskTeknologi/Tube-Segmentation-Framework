@@ -4,7 +4,6 @@
 #define CL_USE_DEPRECATED_OPENCL_1_1_APIS
 
 #include "OpenCLManager.hpp"
-#include "SIPL/Types.hpp"
 #include <iostream>
 #include <string>
 #include <set>
@@ -18,6 +17,8 @@ using boost::unordered_map;
 #include "parameters.hpp"
 #include "SIPL/Exceptions.hpp"
 #include "inputOutput.hpp"
+
+#include "SIPL/Types.hpp"
 
 typedef struct TubeSegmentation {
     float *Fx, *Fy, *Fz; // The GVF vector field

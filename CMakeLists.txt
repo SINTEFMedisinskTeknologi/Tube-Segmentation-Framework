@@ -8,7 +8,9 @@ cmake_minimum_required(VERSION 2.8)
 #------------------------------------------------------------------------------
 # Set compiler flags
 #------------------------------------------------------------------------------
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O3")
+if(NOT WIN32)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O3")
+endif(NOT WIN32)
 option(USE_C++11 "use C++11 (Tube-Segmentation-Framework)" ON) # cmake option to use boost libraries instead of C++11
 if(USE_C++11)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D CPP11 -std=c++0x")
@@ -24,7 +26,7 @@ set(CMAKE_MODULE_PATH
     ${CMAKE_MODULE_PATH}
     ${PROJECT_SOURCE_DIR}/CMake
     )
-include (tsfInitializeLibraries)
+include(tsfInitializeLibraries)
 tsf_initialize_external_libraries()
 
 
@@ -115,7 +117,7 @@ set(Tube-Segmentation-Framework_LIBRARY_DIRS
     ${SIPL_BINARY_LIBRARY_DIRS}
 )    
 
-configure_file (
+configure_file(
     "${PROJECT_SOURCE_DIR}/CMake/Tube-Segmentation-FrameworkConfig.cmake.in"
     "${PROJECT_BINARY_DIR}/Tube-Segmentation-FrameworkConfig.cmake"
 )
