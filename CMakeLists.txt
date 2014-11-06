@@ -57,7 +57,6 @@ add_library(tubeSegmentationLib
 	segmentation.cpp
 )
 target_link_libraries(tubeSegmentationLib OpenCLUtilityLibrary SIPL ${Boost_LIBRARIES} ${OPENCL_LIBRARIES})
-
 #
 # tubeSegmentation executable
 ###########
@@ -114,7 +113,8 @@ set( Tube-Segmentation-Framework_INCLUDE_DIRS
 set(Tube-Segmentation-Framework_LIBRARY_DIRS
     ${Tube-Segmentation-Framework_BINARY_DIR}
     ${OCL-Utilities_LIBRARY_DIRS}
-    ${SIPL_BINARY_LIBRARY_DIRS}
+    ${SIPL_LIBRARY_DIRS}
+    ${Boost_LIBRARY_DIRS}
 )    
 
 configure_file(
