@@ -128,7 +128,7 @@ TSFOutput * run(std::string filename, paramList &parameters, std::string kernel_
     ocl->program = c.getProgram(0);
 
     // Also compile the HP code
-    oul::HistogramPyramid::compileCode(ocl->oulContext);
+    oul::HistogramPyramid::compileCode(ocl->oulContext, oul_dir);
 
 
     STOP_TIMER("Compiling")
@@ -156,7 +156,7 @@ TSFOutput * run(std::string filename, paramList &parameters, std::string kernel_
         if(getParamStr(parameters, "centerline-method") == "ridge") {
             runCircleFittingAndRidgeTraversal(ocl, dataset, size, parameters, output);
         } else if(getParamStr(parameters, "centerline-method") == "gpu") {
-            runCircleFittingAndNewCenterlineAlg(ocl, dataset, size, parameters, output);
+            runCircleFittingAndNewCenterlineAlg(ocl, dataset, size, parameters, output, kernel_dir, oul_dir);
         } else if(getParamStr(parameters, "centerline-method") == "test") {
             runCircleFittingAndTest(ocl, dataset, size, parameters, output);
         }
@@ -964,7 +964,7 @@ radius->display(40, 80);
 
 
 
-void runCircleFittingAndNewCenterlineAlg(OpenCL * ocl, cl::Image3D * dataset, SIPL::int3 * size, paramList &parameters, TSFOutput * output) {
+void runCircleFittingAndNewCenterlineAlg(OpenCL * ocl, cl::Image3D * dataset, SIPL::int3 * size, paramList &parameters, TSFOutput * output, std::string kernel_dir, std::string oul_dir) {
     INIT_TIMER
     Image3D vectorField, radius;
     Image3D * TDF = new Image3D;
@@ -986,7 +986,7 @@ void runCircleFittingAndNewCenterlineAlg(OpenCL * ocl, cl::Image3D * dataset, SI
     	return;
 
     Image3D * centerline = new Image3D;
-    *centerline = runNewCenterlineAlg(*ocl, *size, parameters, vectorField, *TDF, radius);
+    *centerline = runNewCenterlineAlg(*ocl, *size, parameters, vectorField, *TDF, radius, kernel_dir, oul_dir);
     output->setCenterlineVoxels(centerline);
 
     Image3D * segmentation = new Image3D;
